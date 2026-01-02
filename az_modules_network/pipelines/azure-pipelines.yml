@@ -7,7 +7,7 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-- group: 'TerraformSecrets'
+- group: 'Terraform_Secrets'
 
 steps:
 - task: Checkout@1

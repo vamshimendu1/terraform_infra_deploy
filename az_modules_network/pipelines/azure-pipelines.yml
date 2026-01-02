@@ -7,11 +7,7 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-  TF_VERSION: '1.7.0'
-  ARM_CLIENT_ID: $(TF_VAR_client_id)
-  ARM_CLIENT_SECRET: $(TF_VAR_client_secret)
-  ARM_TENANT_ID: $(TF_VAR_tenant_id)
-  ARM_SUBSCRIPTION_ID: $(TF_VAR_subscription_id)
+- group: 'TerraformSecrets'
 
 steps:
 - task: Checkout@1

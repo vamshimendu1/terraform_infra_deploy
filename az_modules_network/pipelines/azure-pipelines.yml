@@ -1,0 +1,48 @@
+trigger:
+  branches:
+    include:
+      - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  TF_VERSION: '1.7.0'
+  ARM_CLIENT_ID: $(TF_VAR_client_id)
+  ARM_CLIENT_SECRET: $(TF_VAR_client_secret)
+  ARM_TENANT_ID: $(TF_VAR_tenant_id)
+  ARM_SUBSCRIPTION_ID: $(TF_VAR_subscription_id)
+
+steps:
+- task: Checkout@1
+
+- task: Bash@3
+  displayName: Install Terraform
+  inputs:
+    targetType: inline
+    script: |
+      curl -o terraform.zip https://releases.hashicorp.com/terraform/${TF_VERSION}/terraform_${TF_VERSION}_linux_amd64.zip
+      unzip terraform.zip
+      sudo mv terraform /usr/local/bin/
+
+- task: Bash@3
+  displayName: Terraform Init
+  inputs:
+    targetType: inline
+    script: |
+      terraform -chdir=infra/dev init
+
+- task: Bash@3
+  displayName: Terraform Validate
+  inputs:
+    targetType: inline
+    script: |
+      terraform -chdir=infra/dev fmt -check
+      terraform -chdir=infra/dev validate
+
+- task: Bash@3
+  displayName: Terraform Plan
+  inputs:
+    targetType: inline
+    script: |
+      terraform -chdir=infra/dev plan -out=tfplan

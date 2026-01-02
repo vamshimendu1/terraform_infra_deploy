@@ -30,19 +30,19 @@ steps:
   inputs:
     targetType: inline
     script: |
-      terraform -chdir=infra/dev init
+      terraform -chdir=env/dev init
 
 - task: Bash@3
   displayName: Terraform Validate
   inputs:
     targetType: inline
     script: |
-      terraform -chdir=infra/dev fmt -check
-      terraform -chdir=infra/dev validate
+      terraform -chdir=env/dev fmt -check
+      terraform -chdir=env/dev validate
 
 - task: Bash@3
   displayName: Terraform Plan
   inputs:
     targetType: inline
     script: |
-      terraform -chdir=infra/dev plan -out=tfplan
+      terraform -chdir=env/dev plan -out=tfplan

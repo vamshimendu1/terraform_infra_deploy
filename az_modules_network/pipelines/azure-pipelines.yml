@@ -7,10 +7,20 @@ pool:
   name: Default
 
 variables:
-- group: 'Terraform_Secrets'
+  - group: 'Terraform_Secrets'
 
-- name: TF_VERSION
-  value: '1.7.0'
+  - name: TF_VERSION
+    value: '1.7.0'
+
+  - name: ARM_CLIENT_ID
+    value: $(TF_VAR_client_id)
+  - name: ARM_CLIENT_SECRET
+    value: $(TF_VAR_client_secret)
+  - name: ARM_TENANT_ID
+    value: $(TF_VAR_tenant_id)
+  - name: ARM_SUBSCRIPTION_ID
+    value: $(TF_VAR_subscription_id)
+
 steps:
 - task: Checkout@1
 

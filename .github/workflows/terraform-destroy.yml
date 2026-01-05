@@ -60,6 +60,6 @@ jobs:
       # ---------------------------------------------------
       # Terraform Destroy — auto-approve + lock timeout
       # ---------------------------------------------------
-      - name: Terraform Destroy
-        run: terraform destroy -auto-approve -lock-timeout=60s
-        working-directory: infra/terraform/env/dev
+#      - name: Terraform Destroy
+#        run: terraform destroy -auto-approve -lock-timeout=60s
+#        working-directory: infra/terraform/env/dev

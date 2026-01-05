@@ -1,3 +1,8 @@
+resource "azurerm_resource_group" "rg" {
+  name = "rg-dev"
+  location = "East US"
+}
+
 module "acr" {
   source              = "../../modules/acr"
   acr_name            = var.acr_name
